@@ -1,0 +1,9 @@
+version: 2
+
+sources: 
+  - name: airbyte
+    database: airbyte_database
+    schema: airbyte_schema
+    tables:
+      - name: CSVS
+      
