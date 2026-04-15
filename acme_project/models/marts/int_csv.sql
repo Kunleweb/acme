@@ -1,5 +1,4 @@
 with base as (
-
     select
         -- IDs (cast to integers)
         try_to_number(STORE_ID) as store_id,

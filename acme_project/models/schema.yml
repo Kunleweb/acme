@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: airbyte
+    description: "Sources ingested via Airbyte"
+    tables:
+      - name: CSVS
+        description: "Raw CSV transactions data"
+
+models:
+  - name: stg_csv
+    description: "Staging model that selects raw Airbyte CSV data."
+
+  - name: int_csv
+    description: "Intermediate model casting raw string data into appropriate data types and structuring the transaction facts."
+    columns:
+      - name: store_id
+        description: "Identifier for the retail store."
+      - name: product_id
+        description: "Identifier for the purchased product."
+      - name: customer_id
+        description: "Identifier for the purchasing customer."
+      - name: transaction_id
+        description: "Unique identifier for the transaction."
+        tests:
+          - unique
+          - not_null
+      - name: quantity
+        description: "Number of units purchased in the transaction."
+      - name: unit_price
+        description: "Price per unit of the product."
+      - name: total_amount
+        description: "Total financial amount for the transaction."
+      - name: transaction_time
+        description: "Timestamp of the transaction."
+      - name: product_name
+        description: "Name of the product."
+      - name: category
+        description: "Retail category of the product."
+      - name: payment_method
+        description: "Method used to pay for the transaction (e.g., Credit Card, Cash)."
+      - name: _AIRBYTE_RAW_ID
+        description: "Internal Airbyte primary key for raw load."
+      - name: _AIRBYTE_EXTRACTED_AT
+        description: "Timestamp when Airbyte extracted this record."
+      - name: _AIRBYTE_META
+        description: "Internal Airbyte metadata JSON."
+      - name: _AIRBYTE_GENERATION_ID
+        description: "Internal Airbyte generation synchronization identifier."
+      - name: _AB_SOURCE_FILE_URL
+        description: "Source URL path of the raw file."
+      - name: _AB_SOURCE_FILE_LAST_MODIFIED
+        description: "Timestamp of the file's last modification time."
